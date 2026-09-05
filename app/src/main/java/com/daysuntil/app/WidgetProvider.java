@@ -22,51 +22,50 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     static void updateWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
-        SharedPreferences prefs = context.getSharedPreferences("days_until_prefs", Context.MODE_PRIVATE);
-        String eventName = prefs.getString("event_name", "My Event");
-        long targetMillis = prefs.getLong("target_date", System.currentTimeMillis());
+        try {
+            SharedPreferences prefs = context.getSharedPreferences("days_until_prefs", Context.MODE_PRIVATE);
+            long targetMillis = prefs.getLong("target_date", System.currentTimeMillis());
 
-        Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
+            Calendar today = Calendar.getInstance();
+            today.set(Calendar.HOUR_OF_DAY, 0);
+            today.set(Calendar.MINUTE, 0);
+            today.set(Calendar.SECOND, 0);
+            today.set(Calendar.MILLISECOND, 0);
 
-        Calendar target = Calendar.getInstance();
-        target.setTimeInMillis(targetMillis);
-        target.set(Calendar.HOUR_OF_DAY, 0);
-        target.set(Calendar.MINUTE, 0);
-        target.set(Calendar.SECOND, 0);
-        target.set(Calendar.MILLISECOND, 0);
+            Calendar target = Calendar.getInstance();
+            target.setTimeInMillis(targetMillis);
+            target.set(Calendar.HOUR_OF_DAY, 0);
+            target.set(Calendar.MINUTE, 0);
+            target.set(Calendar.SECOND, 0);
+            target.set(Calendar.MILLISECOND, 0);
 
-        long diff = target.getTimeInMillis() - today.getTimeInMillis();
-        long days = diff / (1000 * 60 * 60 * 24);
+            long diff = target.getTimeInMillis() - today.getTimeInMillis();
+            long days = diff / (1000 * 60 * 60 * 24);
 
-        String daysText;
-        if (days < 0) {
-            daysText = Math.abs(days) + " days ago";
-        } else if (days == 0) {
-            daysText = "Today!";
-        } else {
-            daysText = days + " days left";
+            String daysText = String.valueOf(Math.abs(days));
+            String daysLabel = days < 0 ? "days ago" : "days";
+            String topLabel = days < 0 ? "PASSED" : "REMAINING";
+
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault());
+            String dateStr = sdf.format(target.getTime());
+
+            RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+            views.setTextViewText(R.id.widgetDays, daysText);
+            views.setTextViewText(R.id.widgetDaysLabel, daysLabel);
+            views.setTextViewText(R.id.widgetLabel, topLabel);
+            views.setTextViewText(R.id.widgetDate, dateStr);
+
+            Intent intent = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivity(
+                    context, 0, intent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
+            );
+            views.setOnClickPendingIntent(R.id.widgetContainer, pendingIntent);
+
+            appWidgetManager.updateAppWidget(appWidgetId, views);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.getDefault());
-        String dateStr = sdf.format(target.getTime());
-
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-        views.setTextViewText(R.id.widgetEventName, eventName);
-        views.setTextViewText(R.id.widgetDays, daysText);
-        views.setTextViewText(R.id.widgetDate, dateStr);
-
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                context, 0, intent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE
-        );
-        views.setOnClickPendingIntent(R.id.widgetContainer, pendingIntent);
-
-        appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
     @Override

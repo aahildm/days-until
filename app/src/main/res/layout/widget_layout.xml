@@ -6,35 +6,50 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/widget_background"
-    android:padding="12dp">
+    android:padding="16dp">
 
     <TextView
-        android:id="@+id/widgetEventName"
+        android:id="@+id/widgetLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event"
-        android:textSize="14sp"
-        android:textColor="#FFFFFF"
-        android:maxLines="1"
-        android:ellipsize="end" />
+        android:text="REMAINING"
+        android:textSize="11sp"
+        android:textColor="#888888"
+        android:letterSpacing="0.15"
+        android:layout_marginBottom="4dp" />
 
     <TextView
         android:id="@+id/widgetDays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0 days left"
-        android:textSize="20sp"
-        android:textStyle="bold"
+        android:text="0"
+        android:textSize="56sp"
+        android:textStyle="normal"
         android:textColor="#FFFFFF"
-        android:layout_marginTop="4dp" />
+        android:includeFontPadding="false" />
+
+    <TextView
+        android:id="@+id/widgetDaysLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="days"
+        android:textSize="16sp"
+        android:textColor="#AAAAAA"
+        android:layout_marginTop="2dp" />
+
+    <View
+        android:layout_width="32dp"
+        android:layout_height="1dp"
+        android:background="#444444"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:id="@+id/widgetDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jan 01, 2025"
-        android:textSize="12sp"
-        android:textColor="#CCCCCC"
-        android:layout_marginTop="2dp" />
+        android:text="Date"
+        android:textSize="13sp"
+        android:textColor="#CCCCCC" />
 
 </LinearLayout>
