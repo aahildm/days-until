@@ -5,6 +5,7 @@ import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText etEventName;
     private TextView tvSelectedDate, tvDaysLeft;
-    private Button btnPickDate, btnSave, btnUpdateWidget;
+    private Button btnPickDate, btnSave, btnAddWidget;
     private Calendar selectedDate;
     private SharedPreferences prefs;
 
@@ -38,13 +39,13 @@ public class MainActivity extends AppCompatActivity {
         tvDaysLeft = findViewById(R.id.tvDaysLeft);
         btnPickDate = findViewById(R.id.btnPickDate);
         btnSave = findViewById(R.id.btnSave);
-        btnUpdateWidget = findViewById(R.id.btnUpdateWidget);
+        btnAddWidget = findViewById(R.id.btnAddWidget);
 
         loadSavedData();
 
         btnPickDate.setOnClickListener(v -> showDatePicker());
         btnSave.setOnClickListener(v -> saveData());
-        btnUpdateWidget.setOnClickListener(v -> updateAllWidgets());
+        btnAddWidget.setOnClickListener(v -> addWidget());
     }
 
     private void showDatePicker() {
@@ -118,6 +119,29 @@ public class MainActivity extends AppCompatActivity {
                 .getAppWidgetIds(new ComponentName(this, WidgetProvider.class));
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         sendBroadcast(intent);
-        Toast.makeText(this, "Widgets updated!", Toast.LENGTH_SHORT).show();
+    }
+
+    private void addWidget() {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
+        ComponentName provider = new ComponentName(this, WidgetProvider.class);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            // Android 8.0+ — show pin widget dialog
+            if (appWidgetManager.isRequestPinAppWidgetSupported()) {
+                appWidgetManager.requestPinAppWidget(provider, null, null);
+                Toast.makeText(this, "Select where to place widget", Toast.LENGTH_SHORT).show();
+            } else {
+                // Fallback to widget list
+                openWidgetPicker();
+            }
+        } else {
+            // Older Android — open widget list
+            openWidgetPicker();
+        }
+    }
+
+    private void openWidgetPicker() {
+        Intent intent = new Intent(AppWidgetManager.ACTION_APPWIDGET_PICK);
+        startActivity(intent);
     }
 }

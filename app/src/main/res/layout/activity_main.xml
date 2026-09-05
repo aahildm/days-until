@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="#0F0F1A">
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,6 +13,7 @@
         android:text="Days Until"
         android:textSize="28sp"
         android:textStyle="bold"
+        android:textColor="#FFFFFF"
         android:layout_marginBottom="32dp" />
 
     <EditText
@@ -19,6 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Event name (e.g., Birthday)"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#888888"
+        android:backgroundTint="#444444"
         android:layout_marginBottom="16dp" />
 
     <Button
@@ -34,6 +39,7 @@
         android:layout_height="wrap_content"
         android:text="No date selected"
         android:textSize="18sp"
+        android:textColor="#CCCCCC"
         android:layout_marginBottom="16dp" />
 
     <TextView
@@ -43,7 +49,7 @@
         android:text="0 days left"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:textColor="#6750A4"
+        android:textColor="#FFFFFF"
         android:layout_marginBottom="32dp" />
 
     <Button
@@ -54,18 +60,19 @@
         android:layout_marginBottom="8dp" />
 
     <Button
-        android:id="@+id/btnUpdateWidget"
+        android:id="@+id/btnAddWidget"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Update All Widgets"
+        android:text="Add Widget to Home Screen"
         android:layout_marginBottom="8dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add widget: Long-press home screen → Widgets → Days Until"
+        android:text="Or long-press home screen → Widgets → Days Until"
         android:textSize="12sp"
+        android:textColor="#666666"
         android:gravity="center"
-        android:layout_marginTop="24dp" />
+        android:layout_marginTop="16dp" />
 
 </LinearLayout>
