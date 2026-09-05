@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@drawable/widget_background"
+    android:background="#FF1A1A2E"
     android:padding="16dp">
 
     <TextView
@@ -14,9 +14,7 @@
         android:layout_height="wrap_content"
         android:text="REMAINING"
         android:textSize="11sp"
-        android:textColor="#888888"
-        android:letterSpacing="0.15"
-        android:layout_marginBottom="4dp" />
+        android:textColor="#FF888888" />
 
     <TextView
         android:id="@+id/widgetDays"
@@ -24,9 +22,7 @@
         android:layout_height="wrap_content"
         android:text="0"
         android:textSize="56sp"
-        android:textStyle="normal"
-        android:textColor="#FFFFFF"
-        android:includeFontPadding="false" />
+        android:textColor="#FFFFFFFF" />
 
     <TextView
         android:id="@+id/widgetDaysLabel"
@@ -34,15 +30,7 @@
         android:layout_height="wrap_content"
         android:text="days"
         android:textSize="16sp"
-        android:textColor="#AAAAAA"
-        android:layout_marginTop="2dp" />
-
-    <View
-        android:layout_width="32dp"
-        android:layout_height="1dp"
-        android:background="#444444"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        android:textColor="#FFAAAAAA" />
 
     <TextView
         android:id="@+id/widgetDate"
@@ -50,6 +38,7 @@
         android:layout_height="wrap_content"
         android:text="Date"
         android:textSize="13sp"
-        android:textColor="#CCCCCC" />
+        android:textColor="#FFCCCCCC"
+        android:layout_marginTop="8dp" />
 
 </LinearLayout>
