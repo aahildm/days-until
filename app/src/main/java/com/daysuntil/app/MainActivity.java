@@ -126,16 +126,13 @@ public class MainActivity extends AppCompatActivity {
         ComponentName provider = new ComponentName(this, WidgetProvider.class);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            // Android 8.0+ — show pin widget dialog
             if (appWidgetManager.isRequestPinAppWidgetSupported()) {
                 appWidgetManager.requestPinAppWidget(provider, null, null);
                 Toast.makeText(this, "Select where to place widget", Toast.LENGTH_SHORT).show();
             } else {
-                // Fallback to widget list
                 openWidgetPicker();
             }
         } else {
-            // Older Android — open widget list
             openWidgetPicker();
         }
     }
