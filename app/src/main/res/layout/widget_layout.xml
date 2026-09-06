@@ -9,6 +9,24 @@
     android:padding="12dp">
 
     <TextView
+        android:id="@+id/widgetClock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:54"
+        android:textSize="20sp"
+        android:textColor="#FFFFFFFF"
+        android:layout_marginBottom="2dp" />
+
+    <TextView
+        android:id="@+id/widgetTodayDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tue, 8 Sep"
+        android:textSize="11sp"
+        android:textColor="#FF888888"
+        android:layout_marginBottom="10dp" />
+
+    <TextView
         android:id="@+id/widgetLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

@@ -1,15 +1,14 @@
 package com.daysuntil.app;
 
-import android.appwidget.AppWidgetManager;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 
-public class MidnightAlarmReceiver extends BroadcastReceiver {
+public class BootReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        WidgetProvider.refreshAll(context);
         WidgetProvider.scheduleMidnightUpdate(context);
+        WidgetProvider.refreshAll(context);
+        TickService.start(context);
     }
 }

@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.provider.AlarmClock;
 import android.widget.RemoteViews;
 
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ public class WidgetProvider extends AppWidgetProvider {
             updateWidget(context, appWidgetManager, appWidgetId);
         }
         scheduleMidnightUpdate(context);
+        TickService.start(context);
     }
 
     @Override
@@ -50,13 +52,16 @@ public class WidgetProvider extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         scheduleMidnightUpdate(context);
+        TickService.start(context);
     }
 
     @Override
     public void onDisabled(Context context) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-        if (am == null) return;
-        am.cancel(getAlarmPendingIntent(context));
+        if (am != null) {
+            am.cancel(getAlarmPendingIntent(context));
+        }
+        context.stopService(new Intent(context, TickService.class));
     }
 
     static void updateWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
@@ -65,8 +70,9 @@ public class WidgetProvider extends AppWidgetProvider {
         long targetMillis = prefs.getLong("target_date", System.currentTimeMillis());
 
         TimeZone tz = TimeZone.getDefault();
+        Calendar now = Calendar.getInstance(tz);
 
-        Calendar today = Calendar.getInstance(tz);
+        Calendar today = (Calendar) now.clone();
         today.set(Calendar.HOUR_OF_DAY, 0);
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
@@ -83,19 +89,38 @@ public class WidgetProvider extends AppWidgetProvider {
                 target.getTimeInMillis() - today.getTimeInMillis());
         String daysText = String.valueOf(Math.max(days, 0));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
-        String dateStr = sdf.format(target.getTime());
+        SimpleDateFormat targetDateFmt = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
+        String targetDateStr = targetDateFmt.format(target.getTime());
+
+        SimpleDateFormat clockFmt = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        String clockStr = clockFmt.format(now.getTime());
+
+        SimpleDateFormat todayFmt = new SimpleDateFormat("EEE, d MMM", Locale.getDefault());
+        String todayStr = todayFmt.format(now.getTime());
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        views.setTextViewText(R.id.widgetClock, clockStr);
+        views.setTextViewText(R.id.widgetTodayDate, todayStr);
         views.setTextViewText(R.id.widgetLabel, eventName);
         views.setTextViewText(R.id.widgetDays, daysText);
-        views.setTextViewText(R.id.widgetDate, dateStr);
+        views.setTextViewText(R.id.widgetDate, targetDateStr);
 
-        Intent intent = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(
-                context, 0, intent,
+        Intent alarmIntent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+        alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        PendingIntent alarmPendingIntent = PendingIntent.getActivity(
+                context, 1, alarmIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        views.setOnClickPendingIntent(R.id.widgetContainer, pendingIntent);
+        views.setOnClickPendingIntent(R.id.widgetClock, alarmPendingIntent);
+        views.setOnClickPendingIntent(R.id.widgetTodayDate, alarmPendingIntent);
+
+        Intent appIntent = new Intent(context, MainActivity.class);
+        PendingIntent appPendingIntent = PendingIntent.getActivity(
+                context, 0, appIntent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        views.setOnClickPendingIntent(R.id.widgetLabel, appPendingIntent);
+        views.setOnClickPendingIntent(R.id.widgetDays, appPendingIntent);
+        views.setOnClickPendingIntent(R.id.widgetDaysLabel, appPendingIntent);
+        views.setOnClickPendingIntent(R.id.widgetDate, appPendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
