@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
         today.set(Calendar.MILLISECOND, 0);
 
         long diff = selectedDate.getTimeInMillis() - today.getTimeInMillis();
-        long days = diff / (1000 * 60 * 60 * 24);
+        long days = java.util.concurrent.TimeUnit.MILLISECONDS.toDays(diff);
 
         if (days < 0) {
             tvDaysLeft.setText(Math.abs(days) + " days ago");
