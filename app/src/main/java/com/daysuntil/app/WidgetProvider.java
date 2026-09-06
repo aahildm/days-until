@@ -27,6 +27,27 @@ public class WidgetProvider extends AppWidgetProvider {
     }
 
     @Override
+    public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
+        String action = intent.getAction();
+
+        if (Intent.ACTION_DATE_CHANGED.equals(action)
+                || Intent.ACTION_TIME_CHANGED.equals(action)
+                || Intent.ACTION_TIMEZONE_CHANGED.equals(action)) {
+            refreshAll(context);
+        }
+    }
+
+    static void refreshAll(Context context) {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        ComponentName component = new ComponentName(context, WidgetProvider.class);
+        int[] ids = appWidgetManager.getAppWidgetIds(component);
+        for (int id : ids) {
+            updateWidget(context, appWidgetManager, id);
+        }
+    }
+
+    @Override
     public void onEnabled(Context context) {
         scheduleMidnightUpdate(context);
     }
@@ -35,8 +56,7 @@ public class WidgetProvider extends AppWidgetProvider {
     public void onDisabled(Context context) {
         AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         if (am == null) return;
-        PendingIntent pi = getAlarmPendingIntent(context);
-        am.cancel(pi);
+        am.cancel(getAlarmPendingIntent(context));
     }
 
     static void updateWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
@@ -63,7 +83,7 @@ public class WidgetProvider extends AppWidgetProvider {
                 target.getTimeInMillis() - today.getTimeInMillis());
         String daysText = String.valueOf(Math.max(days, 0));
 
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
         String dateStr = sdf.format(target.getTime());
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);

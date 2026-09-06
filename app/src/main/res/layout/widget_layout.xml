@@ -6,22 +6,24 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#FF1A1A2E"
-    android:padding="16dp">
+    android:padding="12dp">
 
     <TextView
         android:id="@+id/widgetLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="REMAINING"
-        android:textSize="11sp"
-        android:textColor="#FF888888" />
+        android:textSize="10sp"
+        android:textColor="#FF888888"
+        android:maxLines="1"
+        android:ellipsize="end" />
 
     <TextView
         android:id="@+id/widgetDays"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="0"
-        android:textSize="56sp"
+        android:textSize="48sp"
         android:textColor="#FFFFFFFF" />
 
     <TextView
@@ -29,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="days"
-        android:textSize="16sp"
+        android:textSize="13sp"
         android:textColor="#FFAAAAAA" />
 
     <TextView
@@ -37,8 +39,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date"
-        android:textSize="13sp"
+        android:textSize="11sp"
         android:textColor="#FFCCCCCC"
-        android:layout_marginTop="8dp" />
+        android:layout_marginTop="4dp" />
 
 </LinearLayout>
