@@ -4,61 +4,86 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:background="#FF1A1A2E"
     android:padding="12dp">
 
-    <TextView
-        android:id="@+id/widgetClock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="12:54"
-        android:textSize="20sp"
-        android:textColor="#FFFFFFFF"
-        android:layout_marginBottom="2dp" />
+    <LinearLayout
+        android:id="@+id/widgetClockSection"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/widgetTodayDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tue, 8 Sep"
-        android:textSize="11sp"
-        android:textColor="#FF888888"
-        android:layout_marginBottom="10dp" />
+        <TextView
+            android:id="@+id/widgetClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12:54"
+            android:textSize="30sp"
+            android:textColor="#FFFFFFFF" />
 
-    <TextView
-        android:id="@+id/widgetLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="REMAINING"
-        android:textSize="10sp"
-        android:textColor="#FF888888"
-        android:maxLines="1"
-        android:ellipsize="end" />
+        <TextView
+            android:id="@+id/widgetTodayDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tue, 8 Sep"
+            android:textSize="12sp"
+            android:textColor="#FF999999"
+            android:layout_marginTop="2dp" />
 
-    <TextView
-        android:id="@+id/widgetDays"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="48sp"
-        android:textColor="#FFFFFFFF" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/widgetDaysLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="days"
-        android:textSize="13sp"
-        android:textColor="#FFAAAAAA" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#33FFFFFF"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp" />
 
-    <TextView
-        android:id="@+id/widgetDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date"
-        android:textSize="11sp"
-        android:textColor="#FFCCCCCC"
-        android:layout_marginTop="4dp" />
+    <LinearLayout
+        android:id="@+id/widgetEventSection"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.4"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/widgetLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="REMAINING"
+            android:textSize="10sp"
+            android:textColor="#FF888888"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/widgetDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textSize="44sp"
+            android:textColor="#FFFFFFFF" />
+
+        <TextView
+            android:id="@+id/widgetDaysLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="days"
+            android:textSize="13sp"
+            android:textColor="#FFAAAAAA" />
+
+        <TextView
+            android:id="@+id/widgetDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:textSize="11sp"
+            android:textColor="#FFCCCCCC"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

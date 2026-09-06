@@ -8,6 +8,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.provider.AlarmClock;
 import android.widget.RemoteViews;
 
@@ -105,24 +106,40 @@ public class WidgetProvider extends AppWidgetProvider {
         views.setTextViewText(R.id.widgetDays, daysText);
         views.setTextViewText(R.id.widgetDate, targetDateStr);
 
-        Intent alarmIntent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
-        alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent alarmPendingIntent = PendingIntent.getActivity(
-                context, 1, alarmIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        views.setOnClickPendingIntent(R.id.widgetClock, alarmPendingIntent);
-        views.setOnClickPendingIntent(R.id.widgetTodayDate, alarmPendingIntent);
+        PendingIntent clockPendingIntent = buildClockPendingIntent(context);
+        if (clockPendingIntent != null) {
+            views.setOnClickPendingIntent(R.id.widgetClockSection, clockPendingIntent);
+        }
 
         Intent appIntent = new Intent(context, MainActivity.class);
         PendingIntent appPendingIntent = PendingIntent.getActivity(
                 context, 0, appIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
-        views.setOnClickPendingIntent(R.id.widgetLabel, appPendingIntent);
-        views.setOnClickPendingIntent(R.id.widgetDays, appPendingIntent);
-        views.setOnClickPendingIntent(R.id.widgetDaysLabel, appPendingIntent);
-        views.setOnClickPendingIntent(R.id.widgetDate, appPendingIntent);
+        views.setOnClickPendingIntent(R.id.widgetEventSection, appPendingIntent);
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
+    private static PendingIntent buildClockPendingIntent(Context context) {
+        Intent alarmIntent = new Intent(AlarmClock.ACTION_SHOW_ALARMS);
+        alarmIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        PackageManager pm = context.getPackageManager();
+        if (alarmIntent.resolveActivity(pm) != null) {
+            return PendingIntent.getActivity(
+                    context, 1, alarmIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        }
+
+        // Fallback: try opening the default Clock app directly
+        Intent clockAppIntent = pm.getLaunchIntentForPackage("com.android.deskclock");
+        if (clockAppIntent != null) {
+            return PendingIntent.getActivity(
+                    context, 2, clockAppIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        }
+
+        return null;
     }
 
     static void scheduleMidnightUpdate(Context context) {
