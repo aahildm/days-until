@@ -31,3 +31,14 @@ dependencies {
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }
+
+android.signingConfigs {
+    debug {
+        storeFile file("../debug.keystore")
+        storePassword "android"
+        keyAlias "androiddebugkey"
+        keyPassword "android"
+    }
+}
+
+android.buildTypes.debug.signingConfig = android.signingConfigs.debug
