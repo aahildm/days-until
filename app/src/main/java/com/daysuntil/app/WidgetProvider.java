@@ -11,6 +11,8 @@ import android.widget.RemoteViews;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 public class WidgetProvider extends AppWidgetProvider {
 
@@ -26,21 +28,24 @@ public class WidgetProvider extends AppWidgetProvider {
         String eventName = prefs.getString("event_name", "REMAINING").toUpperCase();
         long targetMillis = prefs.getLong("target_date", System.currentTimeMillis());
 
-        Calendar today = Calendar.getInstance();
+        TimeZone tz = TimeZone.getDefault();
+
+        Calendar today = Calendar.getInstance(tz);
         today.set(Calendar.HOUR_OF_DAY, 0);
         today.set(Calendar.MINUTE, 0);
         today.set(Calendar.SECOND, 0);
         today.set(Calendar.MILLISECOND, 0);
 
-        Calendar target = Calendar.getInstance();
+        Calendar target = Calendar.getInstance(tz);
         target.setTimeInMillis(targetMillis);
         target.set(Calendar.HOUR_OF_DAY, 0);
         target.set(Calendar.MINUTE, 0);
         target.set(Calendar.SECOND, 0);
         target.set(Calendar.MILLISECOND, 0);
 
-        long diff = target.getTimeInMillis() - today.getTimeInMillis();
-        long days = diff / (1000 * 60 * 60 * 24);
+        long days = TimeUnit.MILLISECONDS.toDays(
+                target.getTimeInMillis() - today.getTimeInMillis());
+
         String daysText = String.valueOf(Math.max(days, 0));
 
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE, d MMMM yyyy", Locale.getDefault());
