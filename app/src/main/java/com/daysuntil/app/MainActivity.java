@@ -32,6 +32,11 @@ public class MainActivity extends AppCompatActivity {
     private Calendar selectedDate;
     private SharedPreferences prefs;
 
+    private EditText etEvent2Name;
+    private TextView tvSelected2Date, tvDays2Left;
+    private Button btnPick2Date;
+    private Calendar selectedDate2;
+
     // Widget bg colors: Dark, Amoled, Navy, Glass, Transparent
     private static final int[] THEME_COLORS = {0xFF1A1A2E, 0xFF000000, 0xFF0D1B2A, 0xAA000000, 0x00000000};
     private static final String[] APP_BG_COLORS = {"#FF1A1A2E","#FF000000","#FF0D1B2A","#FF0A0A0A","#FF0A0A0A"};
