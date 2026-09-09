@@ -1,78 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="24dp"
-    android:gravity="center_horizontal"
-    android:background="#0F0F1A">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Days Until"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="32dp" />
-
-    <EditText
-        android:id="@+id/etEventName"
+    android:id="@+id/rootScrollView"
+    android:background="#FF1A1A2E">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event name (e.g., Birthday)"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#888888"
-        android:backgroundTint="#444444"
-        android:layout_marginBottom="16dp" />
-
-    <Button
-        android:id="@+id/btnPickDate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Pick Date"
-        android:layout_marginBottom="16dp" />
-
-    <TextView
-        android:id="@+id/tvSelectedDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="No date selected"
-        android:textSize="18sp"
-        android:textColor="#CCCCCC"
-        android:layout_marginBottom="16dp" />
-
-    <TextView
-        android:id="@+id/tvDaysLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0 days left"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:layout_marginBottom="32dp" />
-
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save"
-        android:layout_marginBottom="8dp" />
-
-    <Button
-        android:id="@+id/btnAddWidget"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Widget to Home Screen"
-        android:layout_marginBottom="8dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Or long-press home screen → Widgets → Days Until"
-        android:textSize="12sp"
-        android:textColor="#666666"
-        android:gravity="center"
-        android:layout_marginTop="16dp" />
-
-</LinearLayout>
+        android:orientation="vertical"
+        android:padding="28dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Days Until" android:textSize="32sp" android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-light" android:layout_marginTop="24dp" android:layout_marginBottom="4dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Set your countdown" android:textSize="14sp" android:textColor="#66FFFFFF"
+            android:layout_marginBottom="32dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="EVENT NAME" android:textSize="11sp" android:textColor="#66FFFFFF"
+            android:letterSpacing="0.1" android:layout_marginBottom="8dp"/>
+        <EditText android:id="@+id/etEventName" android:layout_width="match_parent"
+            android:layout_height="52dp" android:hint="e.g. Wedding, Exam, Trip"
+            android:hintTextColor="#44FFFFFF" android:textColor="#FFFFFF" android:textSize="16sp"
+            android:background="@drawable/input_bg" android:paddingStart="16dp"
+            android:paddingEnd="16dp" android:inputType="text" android:layout_marginBottom="28dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="TARGET DATE" android:textSize="11sp" android:textColor="#66FFFFFF"
+            android:letterSpacing="0.1" android:layout_marginBottom="8dp"/>
+        <Button android:id="@+id/btnPickDate" android:layout_width="match_parent"
+            android:layout_height="52dp" android:text="Pick a date" android:textColor="#FFFFFF"
+            android:textSize="15sp" android:background="@drawable/input_bg" android:layout_marginBottom="12dp"/>
+        <TextView android:id="@+id/tvSelectedDate" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="" android:textSize="15sp"
+            android:textColor="#AAFFFFFF" android:layout_marginBottom="4dp"/>
+        <TextView android:id="@+id/tvDaysLeft" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="" android:textSize="48sp"
+            android:textColor="#FFFFFF" android:fontFamily="sans-serif-light" android:layout_marginBottom="32dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="CLOCK FORMAT" android:textSize="11sp" android:textColor="#66FFFFFF"
+            android:letterSpacing="0.1" android:layout_marginBottom="8dp"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="52dp"
+            android:orientation="horizontal" android:layout_marginBottom="32dp">
+            <Button android:id="@+id/btn24hr" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1" android:text="24-Hour" android:textColor="#FFFFFF"
+                android:textSize="14sp" android:background="@drawable/btn_primary_bg" android:layout_marginEnd="8dp"/>
+            <Button android:id="@+id/btn12hr" android:layout_width="0dp" android:layout_height="match_parent"
+                android:layout_weight="1" android:text="12-Hour" android:textColor="#AAFFFFFF"
+                android:textSize="14sp" android:background="@drawable/input_bg"/>
+        </LinearLayout>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="WIDGET THEME" android:textSize="11sp" android:textColor="#66FFFFFF"
+            android:letterSpacing="0.1" android:layout_marginBottom="12dp"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="32dp">
+            <LinearLayout android:id="@+id/themeDefault" android:layout_width="0dp"
+                android:layout_height="56dp" android:layout_weight="1" android:background="#FF1A1A2E"
+                android:gravity="center" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Dark" android:textColor="#FFFFFF" android:textSize="11sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/themeAmoled" android:layout_width="0dp"
+                android:layout_height="56dp" android:layout_weight="1" android:background="#FF000000"
+                android:gravity="center" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Amoled" android:textColor="#FFFFFF" android:textSize="11sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/themeNavy" android:layout_width="0dp"
+                android:layout_height="56dp" android:layout_weight="1" android:background="#FF0D1B2A"
+                android:gravity="center" android:layout_marginEnd="6dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Navy" android:textColor="#FFFFFF" android:textSize="11sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/themeGlass" android:layout_width="0dp"
+                android:layout_height="56dp" android:layout_weight="1" android:background="#88000000"
+                android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Glass" android:textColor="#FFFFFF" android:textSize="11sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <Button android:id="@+id/btnSave" android:layout_width="match_parent"
+            android:layout_height="56dp" android:text="Save &amp; Update Widget"
+            android:textColor="#FFFFFF" android:textSize="16sp"
+            android:background="@drawable/btn_primary_bg" android:layout_marginBottom="12dp"/>
+        <Button android:id="@+id/btnAddWidget" android:layout_width="match_parent"
+            android:layout_height="48dp" android:text="Add Widget to Home Screen"
+            android:textColor="#AAFFFFFF" android:textSize="14sp"
+            android:background="@drawable/input_bg" android:layout_marginBottom="16dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="Or long-press home screen → Widgets → Days Until"
+            android:textSize="12sp" android:textColor="#44FFFFFF" android:gravity="center"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</ScrollView>

@@ -93,13 +93,17 @@ public class WidgetProvider extends AppWidgetProvider {
         SimpleDateFormat targetDateFmt = new SimpleDateFormat("d MMM yyyy", Locale.getDefault());
         String targetDateStr = targetDateFmt.format(target.getTime());
 
-        SimpleDateFormat clockFmt = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        boolean use12hr = prefs.getBoolean("use_12hr", false);
+        SimpleDateFormat clockFmt = new SimpleDateFormat(use12hr ? "hh:mm a" : "HH:mm", Locale.getDefault());
         String clockStr = clockFmt.format(now.getTime());
 
         SimpleDateFormat todayFmt = new SimpleDateFormat("EEE, d MMM", Locale.getDefault());
         String todayStr = todayFmt.format(now.getTime());
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
+        int[] themeColors = {0xFF1A1A2E, 0xFF000000, 0xFF0D1B2A, 0xAA000000};
+        int ti = prefs.getInt("theme_index", 0);
+        views.setInt(R.id.widgetContainer, "setBackgroundColor", themeColors[ti < themeColors.length ? ti : 0]);
         views.setTextViewText(R.id.widgetClock, clockStr);
         views.setTextViewText(R.id.widgetTodayDate, todayStr);
         views.setTextViewText(R.id.widgetLabel, eventName);
