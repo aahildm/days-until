@@ -67,8 +67,8 @@ public class WidgetProvider extends AppWidgetProvider {
 
     static void updateWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         SharedPreferences prefs = context.getSharedPreferences("days_until_prefs", Context.MODE_PRIVATE);
-        String eventName = prefs.getString("event_name", "REMAINING").toUpperCase();
-        long targetMillis = prefs.getLong("target_date", System.currentTimeMillis());
+        String eventName = prefs.getString("widget_" + appWidgetId + "_name", "REMAINING").toUpperCase();
+        long targetMillis = prefs.getLong("widget_" + appWidgetId + "_date", System.currentTimeMillis());
 
         TimeZone tz = TimeZone.getDefault();
         Calendar now = Calendar.getInstance(tz);
