@@ -53,6 +53,12 @@
             android:exported="false"
             android:foregroundServiceType="dataSync" />
 
+    
+        <receiver android:name=".ClockReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_TICK"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
