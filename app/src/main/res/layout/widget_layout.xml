@@ -39,17 +39,17 @@
             android:gravity="center">
             <TextView android:id="@+id/widgetLabel"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="REMAINING" android:textSize="9sp" android:textColor="#FF888888"
+                android:text="REMAINING" android:textSize="12sp" android:textColor="#FF888888"
                 android:maxLines="1" android:ellipsize="end"/>
             <TextView android:id="@+id/widgetDays"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="0" android:textSize="36sp" android:textColor="#FFFFFFFF"/>
+                android:text="0" android:textSize="28sp" android:textColor="#FFFFFFFF"/>
             <TextView android:id="@+id/widgetDaysLabel"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="days" android:textSize="11sp" android:textColor="#FFAAAAAA"/>
             <TextView android:id="@+id/widgetDate"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Date" android:textSize="9sp" android:textColor="#FFCCCCCC"
+                android:text="Date" android:textSize="12sp" android:textColor="#FFCCCCCC"
                 android:layout_marginTop="2dp"/>
         </LinearLayout>
         <ImageView android:id="@+id/widgetEventDivider"
@@ -65,17 +65,17 @@
             android:visibility="gone">
             <TextView android:id="@+id/widgetLabel2"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="" android:textSize="9sp" android:textColor="#FF888888"
+                android:text="" android:textSize="12sp" android:textColor="#FF888888"
                 android:maxLines="1" android:ellipsize="end"/>
             <TextView android:id="@+id/widgetDays2"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="0" android:textSize="36sp" android:textColor="#FFFFFFFF"/>
+                android:text="0" android:textSize="28sp" android:textColor="#FFFFFFFF"/>
             <TextView android:id="@+id/widgetDaysLabel2"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
                 android:text="days" android:textSize="11sp" android:textColor="#FFAAAAAA"/>
             <TextView android:id="@+id/widgetDate2"
                 android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="" android:textSize="9sp" android:textColor="#FFCCCCCC"
+                android:text="" android:textSize="12sp" android:textColor="#FFCCCCCC"
                 android:layout_marginTop="2dp"/>
         </LinearLayout>
     </LinearLayout>
