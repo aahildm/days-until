@@ -119,6 +119,62 @@ public class WidgetProvider extends AppWidgetProvider {
         views.setTextViewText(R.id.widgetDays, daysText);
         views.setTextViewText(R.id.widgetDate, targetDateStr);
 
+        // Event 2 — show if name is set
+        String event2Name = prefs.getString("event2_name", "").trim();
+        long event2Millis = prefs.getLong("event2_date", 0);
+        if (!event2Name.isEmpty() && event2Millis > 0) {
+            Calendar target2 = Calendar.getInstance(tz);
+            target2.setTimeInMillis(event2Millis);
+            target2.set(Calendar.HOUR_OF_DAY, 0);
+            target2.set(Calendar.MINUTE, 0);
+            target2.set(Calendar.SECOND, 0);
+            target2.set(Calendar.MILLISECOND, 0);
+            long days2 = TimeUnit.MILLISECONDS.toDays(
+                    target2.getTimeInMillis() - today.getTimeInMillis());
+            String daysText2 = String.valueOf(Math.max(days2, 0));
+            String dateStr2 = targetDateFmt.format(target2.getTime());
+            views.setViewVisibility(R.id.widgetEvent2Block, android.view.View.VISIBLE);
+            views.setViewVisibility(R.id.widgetEventDivider, android.view.View.VISIBLE);
+            views.setTextViewText(R.id.widgetLabel2, event2Name.toUpperCase());
+            views.setTextViewText(R.id.widgetDays2, daysText2);
+            views.setTextViewText(R.id.widgetDate2, dateStr2);
+            views.setTextColor(R.id.widgetLabel2, tc);
+            views.setTextColor(R.id.widgetDays2, tc);
+            views.setTextColor(R.id.widgetDaysLabel2, tc);
+            views.setTextColor(R.id.widgetDate2, tc);
+        } else {
+            views.setViewVisibility(R.id.widgetEvent2Block, android.view.View.GONE);
+            views.setViewVisibility(R.id.widgetEventDivider, android.view.View.GONE);
+        }
+
+        // Event 2 — show if name is set
+        String event2Name = prefs.getString("event2_name", "").trim();
+        long event2Millis = prefs.getLong("event2_date", 0);
+        if (!event2Name.isEmpty() && event2Millis > 0) {
+            Calendar target2 = Calendar.getInstance(tz);
+            target2.setTimeInMillis(event2Millis);
+            target2.set(Calendar.HOUR_OF_DAY, 0);
+            target2.set(Calendar.MINUTE, 0);
+            target2.set(Calendar.SECOND, 0);
+            target2.set(Calendar.MILLISECOND, 0);
+            long days2 = TimeUnit.MILLISECONDS.toDays(
+                    target2.getTimeInMillis() - today.getTimeInMillis());
+            String daysText2 = String.valueOf(Math.max(days2, 0));
+            String dateStr2 = targetDateFmt.format(target2.getTime());
+            views.setViewVisibility(R.id.widgetEvent2Block, android.view.View.VISIBLE);
+            views.setViewVisibility(R.id.widgetEventDivider, android.view.View.VISIBLE);
+            views.setTextViewText(R.id.widgetLabel2, event2Name.toUpperCase());
+            views.setTextViewText(R.id.widgetDays2, daysText2);
+            views.setTextViewText(R.id.widgetDate2, dateStr2);
+            views.setTextColor(R.id.widgetLabel2, tc);
+            views.setTextColor(R.id.widgetDays2, tc);
+            views.setTextColor(R.id.widgetDaysLabel2, tc);
+            views.setTextColor(R.id.widgetDate2, tc);
+        } else {
+            views.setViewVisibility(R.id.widgetEvent2Block, android.view.View.GONE);
+            views.setViewVisibility(R.id.widgetEventDivider, android.view.View.GONE);
+        }
+
         PendingIntent clockPendingIntent = buildClockPendingIntent(context);
         if (clockPendingIntent != null) {
             views.setOnClickPendingIntent(R.id.widgetClockSection, clockPendingIntent);

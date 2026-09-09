@@ -113,6 +113,26 @@
                     android:text="Pink" android:textColor="#FF80AB" android:textSize="10sp"/>
             </LinearLayout>
         </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="EVENT 2 (OPTIONAL)" android:textSize="11sp" android:textColor="#66FFFFFF"
+            android:letterSpacing="0.1" android:layout_marginBottom="8dp" android:layout_marginTop="8dp"/>
+        <EditText android:id="@+id/etEvent2Name" android:layout_width="match_parent"
+            android:layout_height="52dp" android:hint="e.g. Birthday, Holiday"
+            android:textColor="#FFFFFF" android:textSize="16sp"
+            android:background="@drawable/input_bg" android:paddingStart="16dp"
+            android:paddingEnd="16dp" android:inputType="text" android:layout_marginBottom="12dp"/>
+        <Button android:id="@+id/btnPick2Date" android:layout_width="match_parent"
+            android:layout_height="52dp" android:text="Pick date for event 2"
+            android:textColor="#FFFFFF" android:textSize="15sp"
+            android:background="@drawable/input_bg" android:layout_marginBottom="12dp"/>
+        <TextView android:id="@+id/tvSelected2Date" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="" android:textSize="15sp"
+            android:textColor="#AAFFFFFF" android:layout_marginBottom="4dp"/>
+        <TextView android:id="@+id/tvDays2Left" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="" android:textSize="32sp"
+            android:textColor="#FFFFFF" android:fontFamily="sans-serif-light"
+            android:layout_marginBottom="32dp"/>
         <Button android:id="@+id/btnSave" android:layout_width="match_parent"
             android:layout_height="56dp" android:text="Save &amp; Update Widget"
             android:textColor="#FFFFFF" android:textSize="16sp"

@@ -65,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
         textCyan = findViewById(R.id.textCyan);
         textPink = findViewById(R.id.textPink);
 
+        selectedDate2 = Calendar.getInstance();
+        etEvent2Name = findViewById(R.id.etEvent2Name);
+        tvSelected2Date = findViewById(R.id.tvSelected2Date);
+        tvDays2Left = findViewById(R.id.tvDays2Left);
+        btnPick2Date = findViewById(R.id.btnPick2Date);
+
+        btnPick2Date.setOnClickListener(v -> showDatePicker2());
+
         loadSavedData();
         updateClockFormatUI();
         applyThemeBackground();
@@ -166,6 +174,8 @@ public class MainActivity extends AppCompatActivity {
         prefs.edit()
                 .putString("event_name", eventName)
                 .putLong("target_date", selectedDate.getTimeInMillis())
+                .putString("event2_name", etEvent2Name.getText().toString().trim())
+                .putLong("event2_date", selectedDate2.getTimeInMillis())
                 .apply();
         Toast.makeText(this, "Saved!", Toast.LENGTH_SHORT).show();
         updateAllWidgets();
@@ -175,6 +185,37 @@ public class MainActivity extends AppCompatActivity {
         etEventName.setText(prefs.getString("event_name", "My Event"));
         selectedDate.setTimeInMillis(prefs.getLong("target_date", System.currentTimeMillis()));
         updateDateDisplay();
+
+        // Load event 2
+        String e2name = prefs.getString("event2_name", "");
+        long e2date = prefs.getLong("event2_date", 0);
+        etEvent2Name.setText(e2name);
+        if (e2date > 0) selectedDate2.setTimeInMillis(e2date);
+        updateDate2Display();
+    }
+
+    private void showDatePicker2() {
+        new DatePickerDialog(this,
+                (view, year, month, dayOfMonth) -> {
+                    selectedDate2.set(year, month, dayOfMonth, 0, 0, 0);
+                    updateDate2Display();
+                },
+                selectedDate2.get(Calendar.YEAR),
+                selectedDate2.get(Calendar.MONTH),
+                selectedDate2.get(Calendar.DAY_OF_MONTH)).show();
+    }
+
+    private void updateDate2Display() {
+        tvSelected2Date.setText(new SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault())
+                .format(selectedDate2.getTime()));
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 0); today.set(Calendar.MINUTE, 0);
+        today.set(Calendar.SECOND, 0); today.set(Calendar.MILLISECOND, 0);
+        long days = java.util.concurrent.TimeUnit.MILLISECONDS
+                .toDays(selectedDate2.getTimeInMillis() - today.getTimeInMillis());
+        if (days < 0) tvDays2Left.setText(Math.abs(days) + " days ago");
+        else if (days == 0) tvDays2Left.setText("Today!");
+        else tvDays2Left.setText(days + " days left");
     }
 
     private void updateAllWidgets() {
