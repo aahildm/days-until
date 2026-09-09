@@ -72,7 +72,7 @@ public class WidgetConfigActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("days_until_prefs", MODE_PRIVATE);
         prefs.edit()
                 .putString("widget_" + appWidgetId + "_name", eventName)
-                .putLong("widget_" + appWidgetId + "_date", selectedDate.getTimeInMillis())
+                .putLong("target_date", selectedDate.getTimeInMillis())
                 .apply();
 
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(this);
