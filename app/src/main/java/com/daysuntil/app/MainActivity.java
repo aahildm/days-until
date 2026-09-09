@@ -64,10 +64,10 @@ public class MainActivity extends AppCompatActivity {
         btnAddWidget.setOnClickListener(v -> addWidget());
         btn24hr.setOnClickListener(v -> setClockFormat(false));
         btn12hr.setOnClickListener(v -> setClockFormat(true));
-        themeDefault.setOnClickListener(v -> setTheme(0));
-        themeAmoled.setOnClickListener(v -> setTheme(1));
-        themeNavy.setOnClickListener(v -> setTheme(2));
-        themeGlass.setOnClickListener(v -> setTheme(3));
+        themeDefault.setOnClickListener(v -> applyTheme(0));
+        themeAmoled.setOnClickListener(v -> applyTheme(1));
+        themeNavy.setOnClickListener(v -> applyTheme(2));
+        themeGlass.setOnClickListener(v -> applyTheme(3));
     }
 
     private void setClockFormat(boolean use12hr) {
@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         btn12hr.setAlpha(use12hr ? 1f : 0.4f);
     }
 
-    private void setTheme(int index) {
+    private void applyTheme(int index) {
         prefs.edit().putInt("theme_index", index).apply();
         applyThemeBackground();
         updateAllWidgets();
