@@ -101,9 +101,18 @@ public class WidgetProvider extends AppWidgetProvider {
         String todayStr = todayFmt.format(now.getTime());
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
-        int[] themeColors = {0xFF1A1A2E, 0xFF000000, 0xFF0D1B2A, 0xAA000000};
+        int[] themeColors = {0xFF1A1A2E, 0xFF000000, 0xFF0D1B2A, 0xAA000000, 0x00000000};
         int ti = prefs.getInt("theme_index", 0);
         views.setInt(R.id.widgetContainer, "setBackgroundColor", themeColors[ti < themeColors.length ? ti : 0]);
+        int[] txtColors = {0xFFFFFFFF, 0xFFFFE066, 0xFF66FFEE, 0xFFFF80AB};
+        int tci = prefs.getInt("text_color_index", 0);
+        int tc = txtColors[tci < txtColors.length ? tci : 0];
+        views.setTextColor(R.id.widgetClock, tc);
+        views.setTextColor(R.id.widgetTodayDate, tc);
+        views.setTextColor(R.id.widgetLabel, tc);
+        views.setTextColor(R.id.widgetDays, tc);
+        views.setTextColor(R.id.widgetDaysLabel, tc);
+        views.setTextColor(R.id.widgetDate, tc);
         views.setTextViewText(R.id.widgetClock, clockStr);
         views.setTextViewText(R.id.widgetTodayDate, todayStr);
         views.setTextViewText(R.id.widgetLabel, eventName);

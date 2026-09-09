@@ -20,6 +20,7 @@
             android:letterSpacing="0.1" android:layout_marginBottom="8dp"/>
         <EditText android:id="@+id/etEventName" android:layout_width="match_parent"
             android:layout_height="52dp" android:hint="e.g. Wedding, Exam, Trip"
+            android:textColor="#FFFFFF" android:textSize="16sp"
             android:background="@drawable/input_bg" android:paddingStart="16dp"
             android:paddingEnd="16dp" android:inputType="text" android:layout_marginBottom="28dp"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -52,28 +53,64 @@
         <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
             android:orientation="horizontal" android:layout_marginBottom="32dp">
             <LinearLayout android:id="@+id/themeDefault" android:layout_width="0dp"
-                android:layout_height="56dp" android:layout_weight="1" android:background="#FF1A1A2E"
-                android:gravity="center" android:layout_marginEnd="6dp">
+                android:layout_height="52dp" android:layout_weight="1" android:background="#FF1A1A2E"
+                android:gravity="center" android:layout_marginEnd="5dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Dark" android:textColor="#FFFFFF" android:textSize="11sp"/>
+                    android:text="Dark" android:textColor="#FFFFFF" android:textSize="10sp"/>
             </LinearLayout>
             <LinearLayout android:id="@+id/themeAmoled" android:layout_width="0dp"
-                android:layout_height="56dp" android:layout_weight="1" android:background="#FF000000"
-                android:gravity="center" android:layout_marginEnd="6dp">
+                android:layout_height="52dp" android:layout_weight="1" android:background="#FF000000"
+                android:gravity="center" android:layout_marginEnd="5dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Amoled" android:textColor="#FFFFFF" android:textSize="11sp"/>
+                    android:text="Amoled" android:textColor="#FFFFFF" android:textSize="10sp"/>
             </LinearLayout>
             <LinearLayout android:id="@+id/themeNavy" android:layout_width="0dp"
-                android:layout_height="56dp" android:layout_weight="1" android:background="#FF0D1B2A"
-                android:gravity="center" android:layout_marginEnd="6dp">
+                android:layout_height="52dp" android:layout_weight="1" android:background="#FF0D1B2A"
+                android:gravity="center" android:layout_marginEnd="5dp">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Navy" android:textColor="#FFFFFF" android:textSize="11sp"/>
+                    android:text="Navy" android:textColor="#FFFFFF" android:textSize="10sp"/>
             </LinearLayout>
             <LinearLayout android:id="@+id/themeGlass" android:layout_width="0dp"
-                android:layout_height="56dp" android:layout_weight="1" android:background="#88000000"
+                android:layout_height="52dp" android:layout_weight="1" android:background="#88000000"
+                android:gravity="center" android:layout_marginEnd="5dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Glass" android:textColor="#FFFFFF" android:textSize="10sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/themeTransparent" android:layout_width="0dp"
+                android:layout_height="52dp" android:layout_weight="1" android:background="#22FFFFFF"
                 android:gravity="center">
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Glass" android:textColor="#FFFFFF" android:textSize="11sp"/>
+                    android:text="Clear" android:textColor="#FFFFFF" android:textSize="10sp"/>
+            </LinearLayout>
+        </LinearLayout>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="TEXT COLOR" android:textSize="11sp" android:textColor="#66FFFFFF"
+            android:letterSpacing="0.1" android:layout_marginBottom="12dp"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="horizontal" android:layout_marginBottom="32dp">
+            <LinearLayout android:id="@+id/textWhite" android:layout_width="0dp"
+                android:layout_height="52dp" android:layout_weight="1" android:background="#22FFFFFF"
+                android:gravity="center" android:layout_marginEnd="5dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="White" android:textColor="#FFFFFF" android:textSize="10sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/textYellow" android:layout_width="0dp"
+                android:layout_height="52dp" android:layout_weight="1" android:background="#22FFE066"
+                android:gravity="center" android:layout_marginEnd="5dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Warm" android:textColor="#FFE066" android:textSize="10sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/textCyan" android:layout_width="0dp"
+                android:layout_height="52dp" android:layout_weight="1" android:background="#2266FFEE"
+                android:gravity="center" android:layout_marginEnd="5dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Cyan" android:textColor="#66FFEE" android:textSize="10sp"/>
+            </LinearLayout>
+            <LinearLayout android:id="@+id/textPink" android:layout_width="0dp"
+                android:layout_height="52dp" android:layout_weight="1" android:background="#22FF80AB"
+                android:gravity="center">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="Pink" android:textColor="#FF80AB" android:textSize="10sp"/>
             </LinearLayout>
         </LinearLayout>
         <Button android:id="@+id/btnSave" android:layout_width="match_parent"

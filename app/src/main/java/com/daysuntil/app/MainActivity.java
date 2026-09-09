@@ -26,12 +26,17 @@ public class MainActivity extends AppCompatActivity {
     private EditText etEventName;
     private TextView tvSelectedDate, tvDaysLeft;
     private Button btnPickDate, btnSave, btnAddWidget, btn24hr, btn12hr;
-    private LinearLayout themeDefault, themeAmoled, themeNavy, themeGlass;
+    private LinearLayout themeDefault, themeAmoled, themeNavy, themeGlass, themeTransparent;
+    private LinearLayout textWhite, textYellow, textCyan, textPink;
     private ScrollView rootScrollView;
     private Calendar selectedDate;
     private SharedPreferences prefs;
 
-    private static final String[] THEME_COLORS = {"#FF1A1A2E","#FF000000","#FF0D1B2A","#FF0A0A0A"};
+    // Widget bg colors: Dark, Amoled, Navy, Glass, Transparent
+    private static final int[] THEME_COLORS = {0xFF1A1A2E, 0xFF000000, 0xFF0D1B2A, 0xAA000000, 0x00000000};
+    private static final String[] APP_BG_COLORS = {"#FF1A1A2E","#FF000000","#FF0D1B2A","#FF0A0A0A","#FF0A0A0A"};
+    private static final int[] TEXT_COLORS = {0xFFFFFFFF, 0xFFFFE066, 0xFF66FFEE, 0xFFFF80AB};
+    private static final String[] TEXT_COLOR_HEX = {"#FFFFFFFF","#FFFFE066","#FF66FFEE","#FFFF80AB"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +59,16 @@ public class MainActivity extends AppCompatActivity {
         themeAmoled = findViewById(R.id.themeAmoled);
         themeNavy = findViewById(R.id.themeNavy);
         themeGlass = findViewById(R.id.themeGlass);
+        themeTransparent = findViewById(R.id.themeTransparent);
+        textWhite = findViewById(R.id.textWhite);
+        textYellow = findViewById(R.id.textYellow);
+        textCyan = findViewById(R.id.textCyan);
+        textPink = findViewById(R.id.textPink);
 
         loadSavedData();
         updateClockFormatUI();
         applyThemeBackground();
+        highlightTextColor();
 
         btnPickDate.setOnClickListener(v -> showDatePicker());
         btnSave.setOnClickListener(v -> saveData());
@@ -68,6 +79,11 @@ public class MainActivity extends AppCompatActivity {
         themeAmoled.setOnClickListener(v -> applyTheme(1));
         themeNavy.setOnClickListener(v -> applyTheme(2));
         themeGlass.setOnClickListener(v -> applyTheme(3));
+        themeTransparent.setOnClickListener(v -> applyTheme(4));
+        textWhite.setOnClickListener(v -> setTextColor(0));
+        textYellow.setOnClickListener(v -> setTextColor(1));
+        textCyan.setOnClickListener(v -> setTextColor(2));
+        textPink.setOnClickListener(v -> setTextColor(3));
     }
 
     private void setClockFormat(boolean use12hr) {
@@ -90,8 +106,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void applyThemeBackground() {
         int index = prefs.getInt("theme_index", 0);
-        rootScrollView.setBackgroundColor(Color.parseColor(THEME_COLORS[index]));
-        LinearLayout[] swatches = {themeDefault, themeAmoled, themeNavy, themeGlass};
+        rootScrollView.setBackgroundColor(Color.parseColor(APP_BG_COLORS[index]));
+        LinearLayout[] swatches = {themeDefault, themeAmoled, themeNavy, themeGlass, themeTransparent};
+        for (int i = 0; i < swatches.length; i++) {
+            swatches[i].setAlpha(i == index ? 1f : 0.45f);
+        }
+    }
+
+    private void setTextColor(int index) {
+        prefs.edit().putInt("text_color_index", index).apply();
+        highlightTextColor();
+        updateAllWidgets();
+    }
+
+    private void highlightTextColor() {
+        int index = prefs.getInt("text_color_index", 0);
+        LinearLayout[] swatches = {textWhite, textYellow, textCyan, textPink};
         for (int i = 0; i < swatches.length; i++) {
             swatches[i].setAlpha(i == index ? 1f : 0.45f);
         }
