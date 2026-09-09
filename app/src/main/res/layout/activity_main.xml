@@ -20,7 +20,6 @@
             android:letterSpacing="0.1" android:layout_marginBottom="8dp"/>
         <EditText android:id="@+id/etEventName" android:layout_width="match_parent"
             android:layout_height="52dp" android:hint="e.g. Wedding, Exam, Trip"
-            android:hintTextColor="#44FFFFFF" android:textColor="#FFFFFF" android:textSize="16sp"
             android:background="@drawable/input_bg" android:paddingStart="16dp"
             android:paddingEnd="16dp" android:inputType="text" android:layout_marginBottom="28dp"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
