@@ -3,11 +3,14 @@ name: Build APK
 on:
   push:
     branches: [ main, master ]
+    tags: [ 'v*' ]
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -35,4 +38,10 @@ jobs:
       with:
         name: days-until-debug-apk
         path: app/build/outputs/apk/debug/app-debug.apk
-        retention-days: 30
+        retention-days: 90
+
+    - name: Attach APK to Release
+      if: startsWith(github.ref, 'refs/tags/v')
+      uses: softprops/action-gh-release@v2
+      with:
+        files: app/build/outputs/apk/debug/app-debug.apk
